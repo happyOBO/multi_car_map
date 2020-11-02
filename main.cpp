@@ -2,14 +2,42 @@
 #include "car.h"
 #include "basic_setting.h"
 #include "map.h"
+#include "user_car.h"
+#include "traffic_sign.h"
 using namespace std;
 
 Car car_arr[10];
+TrafficSign tf_arr[10];
+GLfloat timer1 = 600.0;
+GLfloat timer2 = 800.0;
+GLfloat tf_idx[10][5] = {{750.0,-1600.0,270.0, 0.0, timer1} , {750.0, -3200.0,0.0,1.0, timer1 }, {-750.0,-3200.0, 90.0, 0.0,timer1} ,
+{-750.0,-1600.0, 180.0, 1.0, timer1} , {750.0,3200.0,270.0, 1.0, timer2} , {750.0,1600.0,0.0,0.0,timer2}, {-750.0, 1600.0, 90.0, 1.0, timer2} ,
+{-750.0, 3200.0, 180.0, 0.0, timer2}};
+GLfloat start_point[2] = {300.0,3500.0};
+GLfloat end_point[2] = {5000.0, -2200.0};
+UserCar MyCar(start_point[0],start_point[1],90.0);
+int score = 1000;
 int car_counts = 9;
 void Draw_Wallpaper()
 {
 
 }
+
+void DrawPoint()
+{
+    glPushMatrix();
+        glColor3f(0.35, 0.79,0.99);
+        glTranslatef(start_point[0],0.0,start_point[1]);
+        glutSolidCube(100);
+    glPopMatrix();
+
+    glPushMatrix();
+//        glColor3f();
+        glTranslatef(end_point[0],0.0,end_point[1]);
+        glutSolidCube(100);
+    glPopMatrix();
+}
+
 void Idlefunc()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -18,17 +46,110 @@ void Idlefunc()
         glRotatef(10.0,0.0,1.0,0.0);
         DrawGround();
         Draw_line();
+        DrawPoint();
+        MyCar.Draw_Car();
+        pair<GLfloat,GLfloat> Myloc = MyCar.Return_loc();
+        GLfloat My_x_location = Myloc.first;
+        GLfloat My_z_location = Myloc.second;
+        GLfloat My_ang = MyCar.Return_angle();
+
+        if((-50 < (My_x_location - end_point[0]) && (My_x_location - end_point[0]) < 50 && -50 <(My_z_location - end_point[1]) && (My_z_location - end_point[1]) < 50))
+        {
+            cout<<score<<" / 1000"<<endl;
+            exit(1);
+        }
+
+        for(int j = 0; j<8; j++)
+        {
+            if( ((tf_idx[j][2] - My_ang ) == 180.0 || (tf_idx[j][2] - My_ang ) == -180.0) && tf_arr[j].Return_sign())
+            {
+                // calc term , stop sign
+                if (( !(-750 < My_x_location && My_x_location < 750 && -3200 < My_z_location && My_z_location < -1600) && !(-750 < My_x_location && My_x_location < 750 && 1600 <My_z_location && My_z_location < 3200)))
+                {
+                    if( -1000 <= (tf_idx[j][0] - My_x_location) && (tf_idx[j][0] - My_x_location) <= 1000 && -1000 <= (tf_idx[j][1] - My_z_location) && (tf_idx[j][1] - My_z_location) <= 1000)
+                        if(!MyCar.is_Stop()) score -= 1;
+//                        cout<<score<<endl;
+
+                }
+
+            }
+
+        }
+
+
         for(int i = 0; i < car_counts; i++)
         {
-            car_arr[i].Draw_Car();
+            pair<GLfloat,GLfloat> loc = car_arr[i].Return_loc();
+            GLfloat x_location = loc.first;
+            GLfloat z_location = loc.second;
+            GLfloat ang = car_arr[i].Return_angle();
+
+            // check score
+
+            if((-50 < (x_location - My_x_location) && (x_location - My_x_location) < 50 && -50 <(z_location - My_z_location) && (z_location - My_z_location) < 50))
+            {
+                score -= 1;
+            }
+
+            bool stp = false;
+            for(int j = 0; j<8; j++)
+            {
+                if( ((tf_idx[j][2] - ang ) == 180.0 || (tf_idx[j][2] - ang ) == -180.0) && tf_arr[j].Return_sign())
+                {
+                    // calc term , stop sign
+                    if (( !(-750 < x_location && x_location < 750 && -3200 < z_location && z_location < -1600) && !(-750 < x_location && x_location < 750 && 1600 <z_location && z_location < 3200)))
+                    {
+                        if( -1000 <= (tf_idx[j][0] - x_location) && (tf_idx[j][0] - x_location) <= 1000 && -1000 <= (tf_idx[j][1] - z_location) && (tf_idx[j][1] - z_location) <= 1000)
+                            stp =true;
+                    }
+
+                }
+
+            }
+            car_arr[i].Draw_Car(stp);
             car_arr[i].AutoMove();
 
+        }
+        for(int i = 0; i<8; i++)
+        {
+            tf_arr[i].DrawTrafficSign();
         }
     glPopMatrix();
 
     glFlush();
     glutPostRedisplay();
 }
+
+void MyKeyboard(unsigned char key, int p, int k) {
+ switch (key) {
+ case 'd':
+         MyCar.Rotate(true);
+//         MyCar.Control_velocity(true);
+//        MyCar.move_car(0.0,1.0);
+    break;
+ case 'a':
+         MyCar.Rotate(false);
+//         MyCar.Control_velocity(true);
+//        MyCar.move_car(0.0,-1.0);
+    break;
+ case 'w':
+         MyCar.Control_velocity(true);
+////        MyCar.move_car(1.0,0.0);
+    break;
+ case 's':
+         MyCar.Control_velocity(false);
+//        MyCar.move_car(-1.0,0.0);
+     break;
+ case 32 :
+
+    break;
+ default:
+     break;
+
+ }
+ glutPostRedisplay();
+}
+
 
 
 int main(int argc, char** argv)
@@ -56,12 +177,17 @@ int main(int argc, char** argv)
     car_arr[7].SetCarInfo(4500.0,2200.0,180.0);
     car_arr[8].SetCarInfo(10500.0,2000.0,180.0);
 
+    for (int i = 0; i<8 ; i++)
+    {
+        tf_arr[i].SetTFinfo(tf_idx[i][0],tf_idx[i][1],int(tf_idx[i][2]),tf_idx[i][3],int(tf_idx[i][4]));
+    }
     glClearColor(1.0,1.0,1.0,0.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-5000.0,5000.0,-3000.0,3000.0,-5000.0,5000.0);
     glutDisplayFunc(Draw_Wallpaper);
     glutIdleFunc(Idlefunc);
+    glutKeyboardFunc(MyKeyboard);
     glutMainLoop();
     return 0;
 }

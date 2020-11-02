@@ -35,12 +35,16 @@ void Car::SetCarInfo(GLfloat x, GLfloat z, GLfloat angle)
     Newcolor();
 }
 
-void Car::Draw_Car()
+void Car::Draw_Car(bool stp)
 {
-    Friction();
-    glPushMatrix();
+
+    if(!stp)
+    {
+        Friction();
         car_x += 0.2*car_velocity*cos(-PI/180 *car_rotate);
         car_z += 0.2*car_velocity*sin(-PI/180 *car_rotate);
+    }
+    glPushMatrix();
         glTranslatef(car_x ,0.0,car_z);
         glRotatef(car_rotate ,0.0,1.0,0.0);
         GLUquadricObj *quadratic;
@@ -76,6 +80,12 @@ pair <GLfloat, GLfloat> Car::Return_loc()
     return make_pair(car_x,car_z);
 }
 
+GLfloat Car::Return_angle()
+{
+
+    return car_rotate;
+}
+
 void Car::Control_velocity(bool is_accel)
 {
 
@@ -109,10 +119,10 @@ void Car::Rotate(bool is_right)
     if(is_right)
     {
 
-        car_rotate -= 2.0;
+        car_rotate -= 6.0;
     }
     else
-        car_rotate += 2.0;
+        car_rotate += 6.0;
 
 //    cout<<car_rotate<<endl;
     if(car_rotate>= 360.0 || car_rotate <= -360.0)

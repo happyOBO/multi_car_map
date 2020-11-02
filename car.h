@@ -26,8 +26,9 @@ public :
     Car();
     Car(GLfloat x, GLfloat z);
     pair <GLfloat, GLfloat> Return_loc();
+    GLfloat Return_angle();
     void SetCarInfo(GLfloat x, GLfloat z, GLfloat angle);
-    void Draw_Car();
+    void Draw_Car(bool stp);
     void Control_velocity(bool is_accel);
     void move_car(GLfloat add_x, GLfloat add_z);
     void Rotate(bool is_right);
