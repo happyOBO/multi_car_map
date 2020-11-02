@@ -52,7 +52,6 @@ void Idlefunc()
         GLfloat My_x_location = Myloc.first;
         GLfloat My_z_location = Myloc.second;
         GLfloat My_ang = MyCar.Return_angle();
-
         if((-50 < (My_x_location - end_point[0]) && (My_x_location - end_point[0]) < 50 && -50 <(My_z_location - end_point[1]) && (My_z_location - end_point[1]) < 50))
         {
             cout<<score<<" / 1000"<<endl;
@@ -114,6 +113,9 @@ void Idlefunc()
         {
             tf_arr[i].DrawTrafficSign();
         }
+        Draw_tree_on_st();
+
+
     glPopMatrix();
 
     glFlush();
@@ -161,21 +163,22 @@ int main(int argc, char** argv)
     glutInitWindowPosition(0,0);
     glutCreateWindow("Car Simulation");
 
-    car_arr[0].SetCarInfo(200.0,7500.0,90.0);
-    car_arr[1].SetCarInfo(400.0,5000.0,90.0);
+    car_arr[0].SetCarInfo(-200.0,-7500.0,270.0);
+    car_arr[1].SetCarInfo(-400.0,-5000.0,170.0);
 
     car_arr[6].SetCarInfo(-200.0,-4500.0,270.0);
     car_arr[7].SetCarInfo(-400.0,-6010.0,270.0);
 
     car_arr[2].SetCarInfo(-4500.0,-2100.0,0.0);
-    car_arr[3].SetCarInfo(-13500.0,-2300.0,0.0);
+    car_arr[3].SetCarInfo(-7500.0,-2300.0,0.0);
 
-    car_arr[4].SetCarInfo(15500.0,-2800.0,180.0);
+    car_arr[4].SetCarInfo(7500.0,-2800.0,180.0);
     car_arr[5].SetCarInfo(4400.0,-2600.0,180.0);
 
-    car_arr[6].SetCarInfo(15500.0,2200.0,180.0);
-    car_arr[7].SetCarInfo(4500.0,2200.0,180.0);
-    car_arr[8].SetCarInfo(10500.0,2000.0,180.0);
+    car_arr[6].SetCarInfo(5550.0,2200.0,180.0);
+    car_arr[7].SetCarInfo(4500.0,2000.0,180.0);
+
+    car_arr[8].SetCarInfo(-4050.0,2700.0,0.0);
 
     for (int i = 0; i<8 ; i++)
     {

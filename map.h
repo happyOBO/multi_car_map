@@ -12,5 +12,7 @@
 using namespace std;
 
 void DrawGround();
+void DrawTree(GLfloat x, GLfloat z);
+void Draw_tree_on_st();
 
 #endif // MAP_H_INCLUDED

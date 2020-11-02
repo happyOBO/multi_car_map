@@ -78,13 +78,13 @@ pair <GLfloat, GLfloat> UserCar::Return_loc()
 void UserCar::Control_velocity(bool is_accel)
 {
     cout<<car_x<<" "<<car_z<<endl;
-    if(is_accel && car_velocity < 50.0)
+    if(is_accel && car_velocity < 70.0)
     {
-        car_velocity += 1.0;
+        car_velocity += 10.0;
     }
-    else if(!is_accel && -50.0 < car_velocity )
+    else if(!is_accel && -100.0 < car_velocity )
     {
-            car_velocity -= 1.0;
+            car_velocity -= 5.0;
     }
 }
 
@@ -99,9 +99,9 @@ void UserCar::Friction()
 {
 
     if(car_velocity > 0)
-        car_velocity -= 0.05;
+        car_velocity -= 0.5;
     else if(car_velocity < 0)
-        car_velocity += 0.05;
+        car_velocity += 0.5;
 }
 void UserCar::Rotate(bool is_right)
 {

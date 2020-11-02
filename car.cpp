@@ -89,13 +89,13 @@ GLfloat Car::Return_angle()
 void Car::Control_velocity(bool is_accel)
 {
 
-    if(is_accel && car_velocity < 50.0)
+    if(is_accel && car_velocity < 80.0)
     {
-        car_velocity += 0.1;
+        car_velocity += 0.5;
     }
-    else if(!is_accel && -50.0 < car_velocity )
+    else if(!is_accel && -80.0 < car_velocity )
     {
-            car_velocity -= 0.1;
+            car_velocity -= 0.5;
     }
 }
 
