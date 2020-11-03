@@ -2,7 +2,7 @@
 
 ## Demo
 
-- 데모 영상에서 사용자의 자동차는 붉은 갈색이다.
+- 데모 영상에서 사용자의 자동차는 가운데 도로에서 위에서 아래로 직진하는 짙은 남색 이다.
 <img src="./multi_car_simulation.gif" width="600">
 
 ### Contents
