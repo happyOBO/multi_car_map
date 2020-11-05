@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1604270106 source:g:\documents\github\multi_car_map\basic_setting.cpp
+1604533796 source:g:\documents\github\multi_car_map\basic_setting.cpp
 	"basic_setting.h"
 
-1604211929 g:\documents\github\multi_car_map\basic_setting.h
+1604533968 g:\documents\github\multi_car_map\basic_setting.h
 	<GL/glut.h>
 	<stdio.h>
 	<stdlib.h>
@@ -238,10 +238,10 @@
 	<_mingw.h>
 	<stddef.h>
 
-1604315578 source:g:\documents\github\multi_car_map\car.cpp
+1604501048 source:g:\documents\github\multi_car_map\car.cpp
 	"car.h"
 
-1604282298 g:\documents\github\multi_car_map\car.h
+1604501048 g:\documents\github\multi_car_map\car.h
 	<GL/glut.h>
 	<stdio.h>
 	<stdlib.h>
@@ -253,14 +253,14 @@
 	<vector>
 	<cmath>
 
-1604315854 source:g:\documents\github\multi_car_map\main.cpp
+1604535304 source:g:\documents\github\multi_car_map\main.cpp
 	"car.h"
 	"basic_setting.h"
 	"map.h"
 	"user_car.h"
 	"traffic_sign.h"
 
-1604307650 g:\documents\github\multi_car_map\map.h
+1604534007 g:\documents\github\multi_car_map\map.h
 	<GL/glut.h>
 	<stdio.h>
 	<stdlib.h>
@@ -270,14 +270,15 @@
 	<string.h>
 	<utility>
 	<vector>
+	"basic_setting.h"
 
-1604316173 source:g:\documents\github\multi_car_map\map.cpp
+1604534191 source:g:\documents\github\multi_car_map\map.cpp
 	"map.h"
 
-1604315485 source:g:\documents\github\multi_car_map\user_car.cpp
+1604501049 source:g:\documents\github\multi_car_map\user_car.cpp
 	"user_car.h"
 
-1604292490 g:\documents\github\multi_car_map\user_car.h
+1604501049 g:\documents\github\multi_car_map\user_car.h
 	<GL/glut.h>
 	<stdio.h>
 	<stdlib.h>
@@ -289,7 +290,7 @@
 	<vector>
 	<cmath>
 
-1604211929 source:g:\documents\github\multi_car_map\basic_setting.h
+1604533968 source:g:\documents\github\multi_car_map\basic_setting.h
 	<GL/glut.h>
 	<stdio.h>
 	<stdlib.h>
@@ -300,30 +301,7 @@
 	<utility>
 	<vector>
 
-1604282298 source:g:\documents\github\multi_car_map\car.h
-	<GL/glut.h>
-	<stdio.h>
-	<stdlib.h>
-	<iostream>
-	<ctime>
-	<iostream>
-	<string.h>
-	<utility>
-	<vector>
-	<cmath>
-
-1604307650 source:g:\documents\github\multi_car_map\map.h
-	<GL/glut.h>
-	<stdio.h>
-	<stdlib.h>
-	<iostream>
-	<ctime>
-	<iostream>
-	<string.h>
-	<utility>
-	<vector>
-
-1604292490 source:g:\documents\github\multi_car_map\user_car.h
+1604501048 source:g:\documents\github\multi_car_map\car.h
 	<GL/glut.h>
 	<stdio.h>
 	<stdlib.h>
@@ -335,7 +313,19 @@
 	<vector>
 	<cmath>
 
-1604288131 g:\documents\github\multi_car_map\traffic_sign.h
+1604534007 source:g:\documents\github\multi_car_map\map.h
+	<GL/glut.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<ctime>
+	<iostream>
+	<string.h>
+	<utility>
+	<vector>
+	"basic_setting.h"
+
+1604501049 source:g:\documents\github\multi_car_map\user_car.h
 	<GL/glut.h>
 	<stdio.h>
 	<stdlib.h>
@@ -347,7 +337,7 @@
 	<vector>
 	<cmath>
 
-1604288131 source:g:\documents\github\multi_car_map\traffic_sign.h
+1604533770 g:\documents\github\multi_car_map\traffic_sign.h
 	<GL/glut.h>
 	<stdio.h>
 	<stdlib.h>
@@ -358,7 +348,21 @@
 	<utility>
 	<vector>
 	<cmath>
+	"basic_setting.h"
 
-1604288150 source:g:\documents\github\multi_car_map\traffic_sign.cpp
+1604533770 source:g:\documents\github\multi_car_map\traffic_sign.h
+	<GL/glut.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<ctime>
+	<iostream>
+	<string.h>
+	<utility>
+	<vector>
+	<cmath>
+	"basic_setting.h"
+
+1604533851 source:g:\documents\github\multi_car_map\traffic_sign.cpp
 	"traffic_sign.h"
 

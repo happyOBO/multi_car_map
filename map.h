@@ -9,10 +9,11 @@
 #include <string.h>
 #include <utility>
 #include <vector>
+#include "basic_setting.h"
 using namespace std;
 
 void DrawGround();
-void DrawTree(GLfloat x, GLfloat z);
-void Draw_tree_on_st();
+void DrawTree(int pv, GLfloat x, GLfloat z);
+void Draw_tree_on_st(int pv);
 
 #endif // MAP_H_INCLUDED

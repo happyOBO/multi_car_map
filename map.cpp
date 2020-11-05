@@ -4,7 +4,7 @@
 
 void DrawGround()
 {
-    GLfloat ground_size = 10000.0;
+    GLfloat ground_size = 15000.0;
     GLfloat road_size = 250.0;
     GLfloat bangbang_station = 2400.0;
     GLfloat line_width = 20.0;
@@ -149,10 +149,13 @@ void DrawGround()
 
 
 
-void DrawTree(GLfloat x, GLfloat z)
+void DrawTree(int pv, GLfloat x, GLfloat z)
 {
+    pair<GLfloat, GLfloat> pair_D = Return_point_d(pv);
+    GLfloat dxx = pair_D.first;
+    GLfloat dzz = pair_D.second;
     glPushMatrix();
-        glTranslatef(x ,0.0,z);
+        glTranslatef(x +dxx / 5,0.0,z + dzz / 3);
         GLUquadricObj *quadratic;
         quadratic = gluNewQuadric();
         glRotatef(90.0 ,1.0,0.0,0.0);
@@ -171,7 +174,7 @@ void DrawTree(GLfloat x, GLfloat z)
 }
 
 
-void Draw_tree_on_st()
+void Draw_tree_on_st(int pv)
 {
 //    GLfloat line_width = 20.0;
 //    GLfloat line_height = 50.0;
@@ -182,7 +185,7 @@ void Draw_tree_on_st()
             int tmp = i %100;
             glPushMatrix();
                 glTranslatef(1000.0 * tmp, 0.0,-1900.0);
-                DrawTree(0.0,0.0);
+                DrawTree(pv,0.0,0.0);
             glPopMatrix();
         }
         for(int i = 1; i< 10; i++)
@@ -190,7 +193,7 @@ void Draw_tree_on_st()
             int tmp = i %100;
             glPushMatrix();
                 glTranslatef(-1000.0 * tmp, 0.0,-1900.0);
-                DrawTree(0.0,0.0);
+                DrawTree(pv,0.0,0.0);
             glPopMatrix();
         }
 
@@ -199,7 +202,7 @@ void Draw_tree_on_st()
             int tmp = i %100;
             glPushMatrix();
                 glTranslatef(1000.0 * tmp, 0.0,1700.0);
-                DrawTree(0.0,0.0);
+                DrawTree(pv,0.0,0.0);
             glPopMatrix();
         }
         for(int i = 1; i< 10; i++)
@@ -207,7 +210,7 @@ void Draw_tree_on_st()
             int tmp = i %100;
             glPushMatrix();
                 glTranslatef(-1000.0 * tmp, 0.0,1700.0);
-                DrawTree(0.0,0.0);
+                DrawTree(pv,0.0,0.0);
             glPopMatrix();
         }
 
@@ -216,7 +219,7 @@ void Draw_tree_on_st()
             int tmp = i %100;
             glPushMatrix();
                 glTranslatef(1000.0 * tmp, 0.0,-3100.0);
-                DrawTree(0.0,0.0);
+                DrawTree(pv,0.0,0.0);
             glPopMatrix();
         }
         for(int i = 1; i< 10; i++)
@@ -224,7 +227,7 @@ void Draw_tree_on_st()
             int tmp = i %100;
             glPushMatrix();
                 glTranslatef(-1000.0 * tmp, 0.0,-3100.0);
-                DrawTree(0.0,0.0);
+                DrawTree(pv,0.0,0.0);
             glPopMatrix();
         }
 
@@ -233,7 +236,7 @@ void Draw_tree_on_st()
             int tmp = i %100;
             glPushMatrix();
                 glTranslatef(1000.0 * tmp, 0.0,2900.0);
-                DrawTree(0.0,0.0);
+                DrawTree(pv,0.0,0.0);
             glPopMatrix();
         }
         for(int i = 1; i< 10; i++)
@@ -241,7 +244,7 @@ void Draw_tree_on_st()
             int tmp = i %100;
             glPushMatrix();
                 glTranslatef(-1000.0 * tmp, 0.0,2900.0);
-                DrawTree(0.0,0.0);
+                DrawTree(pv,0.0,0.0);
             glPopMatrix();
         }
     glPopMatrix();

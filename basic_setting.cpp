@@ -1,5 +1,9 @@
 #include "basic_setting.h"
 
+//dx[0] = 0.0;
+//dx[1] = - 1000.0;
+//dz[2] = 100.0;
+
 void Draw_line()
 {
     //x axis : red, y axis : green, z axis : blue
@@ -38,4 +42,11 @@ void Draw_line()
 //            glPopMatrix();
 //        }
 //    glPopMatrix();
+}
+
+
+pair<GLfloat, GLfloat> Return_point_d(int point_of_view)
+{
+
+    return make_pair(dx[point_of_view], dz[point_of_view]);
 }

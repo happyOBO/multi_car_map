@@ -11,6 +11,8 @@
 #include <utility>
 #include <vector>
 #include <cmath>
+#include "basic_setting.h"
+
 using namespace std;
 
 class TrafficSign {
@@ -26,7 +28,7 @@ public :
     TrafficSign();
     void SetTFinfo(GLfloat x, GLfloat z, GLfloat ang ,GLfloat color, int t);
     bool Return_sign();
-    void DrawTrafficSign();
+    void DrawTrafficSign(int pv);
     void ChangeSign();
 
 };

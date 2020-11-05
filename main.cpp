@@ -6,6 +6,8 @@
 #include "traffic_sign.h"
 using namespace std;
 
+
+const double PI = 3.14159;
 Car car_arr[10];
 TrafficSign tf_arr[10];
 GLfloat timer1 = 600.0;
@@ -18,6 +20,9 @@ GLfloat end_point[2] = {5000.0, -2200.0};
 UserCar MyCar(start_point[0],start_point[1],90.0);
 int score = 1000;
 int car_counts = 9;
+
+int point_of_view = 0; // 0 : map , 1 : 3 point , 2 : 1 point
+
 void Draw_Wallpaper()
 {
 
@@ -40,19 +45,35 @@ void DrawPoint()
 
 void Idlefunc()
 {
+
+    pair<GLfloat,GLfloat> Myloc = MyCar.Return_loc();
+    GLfloat My_x_location = Myloc.first;
+    GLfloat My_z_location = Myloc.second;
+    GLfloat My_ang = MyCar.Return_angle();
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
-        glRotatef(40.0,1.0,0.0,0.0);
-        glRotatef(10.0,0.0,1.0,0.0);
+        if(point_of_view == 1)
+        {
+            gluLookAt(My_x_location + 50, 30.0, My_z_location + 50, My_x_location, 0.0, My_z_location, 0.0, 1.0, 0.0 );
+        }
+//        else if(point_of_view == 2)
+//        {
+//            gluLookAt(My_x_location+ 50*cos(-PI/180 *My_ang)  , 0.0, My_z_location + 50*sin(-PI/180 *My_ang), My_x_location + 100*cos(-PI/180 *My_ang), 0.0, My_z_location + 100*sin(-PI/180 *My_ang), 0.0, 0.0, 1.0 );
+//        }
+        else if(point_of_view == 0)
+        {
+//            gluLookAt(100, 4500.0, 500,0.0, 0.0, 0.0, 0.0, 1.0, 0.0 );
+//            glScalef(0.7,1.0,0.7);
+
+            glRotatef(40.0,1.0,0.0,0.0);
+            glRotatef(10.0,0.0,1.0,0.0);
+        }
         DrawGround();
         Draw_line();
         DrawPoint();
+
         MyCar.Draw_Car();
-        pair<GLfloat,GLfloat> Myloc = MyCar.Return_loc();
-        GLfloat My_x_location = Myloc.first;
-        GLfloat My_z_location = Myloc.second;
-        GLfloat My_ang = MyCar.Return_angle();
-        if((-50 < (My_x_location - end_point[0]) && (My_x_location - end_point[0]) < 50 && -50 <(My_z_location - end_point[1]) && (My_z_location - end_point[1]) < 50))
+        if((-100 < (My_x_location - end_point[0]) && (My_x_location - end_point[0]) < 100 && -100 <(My_z_location - end_point[1]) && (My_z_location - end_point[1]) < 100))
         {
             cout<<score<<" / 1000"<<endl;
             exit(1);
@@ -111,9 +132,9 @@ void Idlefunc()
         }
         for(int i = 0; i<8; i++)
         {
-            tf_arr[i].DrawTrafficSign();
+            tf_arr[i].DrawTrafficSign(point_of_view);
         }
-        Draw_tree_on_st();
+        Draw_tree_on_st(point_of_view);
 
 
     glPopMatrix();
@@ -141,6 +162,14 @@ void MyKeyboard(unsigned char key, int p, int k) {
  case 's':
          MyCar.Control_velocity(false);
 //        MyCar.move_car(-1.0,0.0);
+     break;
+ case 'p':
+        if(point_of_view == 1)
+        {
+            point_of_view = 0;
+        }
+        else
+            point_of_view += 1;
      break;
  case 32 :
 

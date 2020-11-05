@@ -1,5 +1,6 @@
 #include "traffic_sign.h"
 
+
 GLfloat pallet[3] = {0.0,0.0,0.0};
 
 TrafficSign::TrafficSign(GLfloat x, GLfloat z, GLfloat ang ,GLfloat color, int t)
@@ -44,8 +45,13 @@ bool TrafficSign::Return_sign()
         return false;
     }
 }
-void TrafficSign::DrawTrafficSign()
+void TrafficSign::DrawTrafficSign(int pv)
 {
+
+    pair<GLfloat, GLfloat> pair_D = Return_point_d(pv);
+    GLfloat dxx = pair_D.first;
+    GLfloat dzz = pair_D.second;
+
     if(counts > term)
     {
         ChangeSign();
@@ -53,7 +59,7 @@ void TrafficSign::DrawTrafficSign()
     }
     counts +=1;
     glPushMatrix();
-        glTranslatef(sign_x + 100.0 ,0.0,sign_z - 600.0);
+        glTranslatef(sign_x + 100.0 +dxx ,0.0,sign_z - 600.0 + dzz);
         GLUquadricObj *quadratic;
         quadratic = gluNewQuadric();
         glPushMatrix();
